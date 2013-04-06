@@ -25,7 +25,7 @@
 		
 		try {
 			Statement stmt = conn.createStatement();
-			rset = stmt.executeQuery("SELECT * FROM blogpost");
+			rset = stmt.executeQuery("SELECT text FROM blogpost WHERE bid = 1");
 		} catch (SQLException e) {
 			error_msg = e.getMessage();
 			if (conn != null) {
@@ -35,7 +35,7 @@
 
 		if (rset != null) {
 			while (rset.next()) {
-				out.print("<p><a href=\"" + rset.getInt("bid") + ".jsp\">" + rset.getString("title") + "</a></p>");
+				out.print("<p>" + rset.getString("text") + "</p>");
 			}
 		} else {
 			out.print(error_msg);
