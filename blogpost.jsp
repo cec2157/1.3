@@ -28,7 +28,7 @@
 		try {
 			Statement stmt1 = conn.createStatement();
 			rset1 = stmt1
-					.executeQuery("SELECT text FROM blogpost WHERE bid = "
+					.executeQuery("SELECT * FROM blogpost WHERE bid = "
 							+ bid);
 			Statement stmt2 = conn.createStatement();
 			rset2 = stmt2
@@ -43,9 +43,11 @@
 
 		if (rset1 != null && rset2 != null) {
 			while (rset1.next()) {
+				out.print("<h3>" + rset1.getString("title") + "</h3>");
 				out.print("<p>" + rset1.getString("text") + "</p>");
 			}
 		%>
+		<br />
 		<h4>Comments</h4>
 		<%
 			while (rset2.next()) {
