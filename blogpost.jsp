@@ -12,6 +12,7 @@
 	OracleDataSource ods = new OracleDataSource();
 	ods.setURL("jdbc:oracle:thin:pq2117/zhaozhong@//w4111b.cs.columbia.edu:1521/ADB");
 	conn = ods.getConnection();
+	int bid = Integer.parseInt(request.getParameter("bid"));
 %>
 
 <html>
@@ -21,11 +22,18 @@
 </head>
 <body>
 	<%
-		ResultSet rset = null;
-		
+		ResultSet rset1 = null;
+		ResultSet rset2 = null;
+
 		try {
-			Statement stmt = conn.createStatement();
-			rset = stmt.executeQuery("SELECT text FROM blogpost WHERE bid = 2");
+			Statement stmt1 = conn.createStatement();
+			rset1 = stmt1
+					.executeQuery("SELECT text FROM blogpost WHERE bid = "
+							+ bid);
+			Statement stmt2 = conn.createStatement();
+			rset2 = stmt2
+					.executeQuery("SELECT * FROM blog_comment B, comments C, write_comment W "
+							+ "WHERE B.cid = C.cid AND C.cid = W.cid AND B.bid = " + bid);
 		} catch (SQLException e) {
 			error_msg = e.getMessage();
 			if (conn != null) {
@@ -33,9 +41,15 @@
 			}
 		}
 
-		if (rset != null) {
-			while (rset.next()) {
-				out.print("<p>" + rset.getString("text") + "</p>");
+		if (rset1 != null && rset2 != null) {
+			while (rset1.next()) {
+				out.print("<p>" + rset1.getString("text") + "</p>");
+			}
+		%>
+		<h4>Comments</h4>
+		<%
+			while (rset2.next()) {
+				out.print("<p>" + rset2.getString("username") + ": " + rset2.getString("text") + "</p>");
 			}
 		} else {
 			out.print(error_msg);

@@ -4,7 +4,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <%@ page import="java.sql.*"%>
-<%@ page import="java.io.*"%>
 <%@ page import="oracle.jdbc.pool.OracleDataSource"%>
 
 <%
@@ -21,6 +20,7 @@
 	<title>Blog</title>
 </head>
 <body>
+	<h1 align="center">My blog</h1>
 	<%
 		ResultSet rset = null;
 		
@@ -36,7 +36,8 @@
 
 		if (rset != null) {
 			while (rset.next()) {
-				out.print("<p><a href=\"" + rset.getInt("bid") + ".jsp\">" + rset.getString("title") + "</a></p>");
+				int bid = rset.getInt("bid");
+				out.print("<p><a href=\"blogpost.jsp?bid=" + bid + "\">" + rset.getString("title") + "</a></p>");
 			}
 		} else {
 			out.print(error_msg);
