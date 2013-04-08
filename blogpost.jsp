@@ -24,6 +24,7 @@
 	<%
 		ResultSet rset1 = null;
 		ResultSet rset2 = null;
+		ResultSet rset3 = null;
 
 		try {
 			Statement stmt1 = conn.createStatement();
@@ -34,6 +35,9 @@
 			rset2 = stmt2
 					.executeQuery("SELECT * FROM blog_comment B, comments C, write_comment W "
 							+ "WHERE B.cid = C.cid AND C.cid = W.cid AND B.bid = " + bid);
+			Statement stmt3 = conn.createStatement();
+			rset3 = stmt3
+					.executeQuery("SELECT * FROM blog_has_tag H, tag T WHERE H.name = T.name AND H.bid = " + bid);
 		} catch (SQLException e) {
 			error_msg = e.getMessage();
 			if (conn != null) {
@@ -47,6 +51,14 @@
 				out.print("<p>" + rset1.getString("text") + "</p>");
 			}
 		%>
+		<br />
+		<h4>Tags:</h4>		
+		<%
+			while (rset3.next()) {
+				out.print("<a href=\"" + rset3.getString("link") +"\">" + rset3.getString("name") + "</a>" + " "); 
+			}
+		%>
+		<br />
 		<br />
 		<h4>Comments</h4>
 		<%
