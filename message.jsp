@@ -13,7 +13,6 @@
 	ods.setURL("jdbc:oracle:thin:pq2117/zhaozhong@//w4111b.cs.columbia.edu:1521/ADB");
 	conn = ods.getConnection();
 	String username = request.getParameter("username");
-	String space = "            ";
 %>
 
 <html>
