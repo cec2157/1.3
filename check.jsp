@@ -38,13 +38,24 @@
 		}
 		if (rset != null) {
 			if (rset.next() != false) {
-				if ((rset.getString("password")).equals(password))
+				if ((rset.getString("password")).equals(password)) {
 					out.print("Welcome!");
+					out.print("<br />");
+					out.print("<a href=\"myinfo.jsp?username=" + username + "\">" + "Login" + "</a>");
+					out.print("<br />");
+					out.print("<a href='login.html'" + ">" + "Logout" + "</a>");
+				}
 					// should jump to another page
-				else
+				else {
 					out.print("Your password is incorrect!");
-			} else
+					out.print("<br />");
+					out.print("<a href='login.html'" + ">" + "go back to login" + "</a>");
+				}
+			} else {
 				out.print("Your username does not exist!");
+				out.print("<br />");
+				out.print("<a href='login.html'" + ">" + "go back to login" + "</a>");
+			}
 		}
 		if (conn != null) {
 			conn.close();
