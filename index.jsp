@@ -20,6 +20,9 @@
 	<title>Blog</title>
 </head>
 <body>
+	<div align="right">
+		<a href="login.html">Login</a>
+	</div>
 	<h1 align="center">My blog</h1>
 	<%
 		ResultSet rset = null;
