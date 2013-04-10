@@ -12,7 +12,7 @@
 	OracleDataSource ods = new OracleDataSource();
 	ods.setURL("jdbc:oracle:thin:pq2117/zhaozhong@//w4111b.cs.columbia.edu:1521/ADB");
 	conn = ods.getConnection();
-	int bid = Integer.parseInt(request.getParameter("bid"));
+	String bid = request.getParameter("bid");
 %>
 
 <html>
@@ -45,7 +45,7 @@
 			}
 		}
 
-		if (rset1 != null && rset2 != null) {
+		if (rset1 != null && rset2 != null && rset3 != null) {
 			while (rset1.next()) {
 				out.print("<h3>" + rset1.getString("title") + "</h3>");
 				out.print("<p>" + rset1.getString("text") + "</p>");
@@ -55,7 +55,8 @@
 		<h4>Tags:</h4>		
 		<%
 			while (rset3.next()) {
-				out.print("<a href=\"" + rset3.getString("link") +"\">" + rset3.getString("name") + "</a>" + " "); 
+				String tagName = rset3.getString("name");
+				out.print("<a href=\"tag.jsp?tag=" + tagName +"\">" + tagName + "</a>" + " ");
 			}
 		%>
 		<br />
