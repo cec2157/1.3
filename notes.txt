@@ -1,0 +1,21 @@
+
+1.login.html->check.jsp
+  type username and password, then submit.
+
+2. check.jsp->myinfo.jsp
+  check if username and password match(I've already done this, but I don't know how to jump to another .jsp if they match.
+And perhaps we need session to pass the username to other .jsp files. Do you know how to implement this?).
+
+3. myinfo.jsp->message.jsp/myphoto.jsp/homepage.jsp
+  In this page, we may have "my messages", "my photos" and "cec's blog". When clicking on "my messages" or "my photos",
+messages or photos of this login user will appear(that's why we should pass username from check.jsp). When clicking on 
+"cec's blog", jump to homepage.jsp
+
+4.homepage.jsp(cec's homepage)
+  "my photos"(only cec's photo) and "my blog"
+
+
+TODO:
+1. Do you know how to pass the username using session or something?
+2. For the table, we may add a "url" attribute that contains the urls of the photos. Whenever the photo page is opened,
+the corresponding pictures can be loaded.
