@@ -62,10 +62,15 @@
 		<br />
 		<br />
 		<h4>Comments</h4>
-		<%
+		<%  out.print("<table>");
 			while (rset2.next()) {
-				out.print("<p>" + rset2.getString("username") + ": " + rset2.getString("text") + "</p>");
+				out.print("<tr>");
+				out.print("<td>" + rset2.getString("cdate") + "</td>");
+				out.print("<td>" + rset2.getString("username") + ":" + "</td>");
+				out.print("<td>" + rset2.getString("text") + "</td>");
+				out.print("</tr>");
 			}
+			out.print("</table>");
 		} else {
 			out.print(error_msg);
 		}
