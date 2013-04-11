@@ -20,14 +20,15 @@
 	<title>Blog</title>
 </head>
 <body>
-	<div align="right">
-		<a href="login.html">Login</a>
-	</div>
 	
 	<% 
-		if (session.getAttribute("username") != null) {
+		if (session.getAttribute("username") == null) {
 			out.print("<div align=\"right\">");
-			out.print("<a href=\"message.jsp\">Messages</a></div>");
+			out.print("<a href=\"login.html\">Log in</a></div>");
+		} else {
+			out.print("<div align=\"right\">");
+			out.print("<a href=\"message.jsp\">Messages</a><br />");
+			out.print("<a href=\"logout.jsp\">Log out</a></div>");
 		}
 	
 	%>
