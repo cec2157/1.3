@@ -40,12 +40,9 @@
 			if (rset.next() != false) {
 				if ((rset.getString("password")).equals(password)) {
 					out.print("Welcome!");
-					out.print("<br />");
-					out.print("<a href=\"myinfo.jsp?username=" + username + "\">" + "Login" + "</a>");
-					out.print("<br />");
-					out.print("<a href='login.html'" + ">" + "Logout" + "</a>");
+					session.setAttribute("username", username);
+					response.sendRedirect("index.jsp");
 				}
-					// should jump to another page
 				else {
 					out.print("Your password is incorrect!");
 					out.print("<br />");

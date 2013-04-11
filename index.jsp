@@ -23,6 +23,15 @@
 	<div align="right">
 		<a href="login.html">Login</a>
 	</div>
+	
+	<% 
+		if (session.getAttribute("username") != null) {
+			out.print("<div align=\"right\">");
+			out.print("<a href=\"message.jsp\">Messages</a></div>");
+		}
+	
+	%>
+	
 	<h1 align="center">My blog</h1>
 	<%
 		ResultSet rset = null;
