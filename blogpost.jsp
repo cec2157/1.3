@@ -78,5 +78,14 @@
 			conn.close();
 		}
 	%>
+	
+	<h5>Post a comment</h5>
+	<form name="writecmt" method="post" action="postcmt.jsp?bid=<%= bid %>">
+	  <textarea maxlength="50" rows="5" cols="25" placeholder="Text" name="body"></textarea><br />
+	  <p>
+		<input type="Submit" value="Submit">
+		<input type="Reset" value="Reset">
+	  </p>
+</form>
 </body>
 </html>
