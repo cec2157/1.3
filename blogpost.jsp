@@ -69,9 +69,9 @@
 				out.print("<td>" + rset2.getString("cdate") + "</td>");
 				out.print("<td>" + rset2.getString("username") + ":" + "</td>");
 				out.print("<td>" + rset2.getString("text") + "</td>");
-				if (session.getAttribute("type").equals("ADMIN") || session.getAttribute("username").equals(rset2.getString("username")))
-					//out.print("<td>" + "<a href=\"deletecomment.jsp?cid=" + rset2.getString("cid") + "?bid=" + bid + "\">" + "delete" + "</a></td>");
-					out.print("<td>" + "<a href=\"deletecomment.jsp?cid=" + rset2.getString("cid") + "\">" + "delete" + "</a></td>");
+				if (session.getAttribute("type") != null && session.getAttribute("username") != null)
+					if (session.getAttribute("type").equals("ADMIN") || session.getAttribute("username").equals(rset2.getString("username")))
+						out.print("<td>" + "<a href=\"deletecomment.jsp?cid=" + rset2.getString("cid") + "\">" + "delete" + "</a></td>");
 				out.print("</tr>");
 			}
 			out.print("</table>");
