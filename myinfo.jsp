@@ -16,10 +16,13 @@
 <title>My Info</title>
 </head>
 <body>
+	<p align="center">
 	<%
 	out.print("<a href=\"photo.jsp\">" + "My Photos" + "</a>");
 	out.print("<br />");
+	out.print("<br />");
 	out.print("<a href=\"message.jsp\">" + "My Messages" + "</a>");
 	%>
+	</p>
 </body>
 </html>

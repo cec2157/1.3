@@ -28,9 +28,8 @@
 	<%
 		ResultSet rset = null;
 		int newmid = 0;
-		String[] months = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
 		Calendar now = Calendar.getInstance();
-		
+
 		Statement stmt1 = conn.createStatement();
 		rset = stmt1.executeQuery("SELECT MAX(mid) FROM message");
 		if (rset != null) {
@@ -38,18 +37,24 @@
 				newmid = rset.getInt("MAX(mid)") + 1;
 			}
 		}
-		
+
 		int year = now.get(Calendar.YEAR);
 		int month = now.get(Calendar.MONTH);
 		int day = now.get(Calendar.DATE);
-		String date = day + "-" + months[month] + "-" + year;
 		
 		text = text.replaceAll("\'", "\'\'");
 		subject = subject.replaceAll("\'", "\'\'");
-		stmt1.executeUpdate("INSERT INTO message(mid, subject, mdate, text) VALUES(" +
-							newmid + ", \'" + subject + "\', \'" + date + "\', \'" + text +"\')");
-		stmt1.executeBatch();
 		
+		int hour = now.get(Calendar.HOUR);
+		int min = now.get(Calendar.MINUTE);
+		int sec = now.get(Calendar.SECOND);
+		String date = "to_date('" + day + "-" + month + "-" + year + " " + hour + ":" + min + ":" + sec + "', ";
+		date = date + "'DD-MM-YYYY HH24:MI:SS')";
+
+		stmt1.executeUpdate("INSERT INTO message(mid, subject, mdate, text) VALUES(" +
+							newmid + ", \'" + subject + "\', " + date + ", \'" + text +"\')");
+		stmt1.executeBatch();
+
 		Statement stmt2 = conn.createStatement();
 		stmt2.executeUpdate("INSERT INTO write_msg(mid, sender_username, receiver_username) VALUES(" + newmid + ", \'" + 
 		from + "\', \'" + to + "\')");

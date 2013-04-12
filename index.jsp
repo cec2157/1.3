@@ -20,7 +20,7 @@
 	<title>Blog</title>
 </head>
 <body>
-	
+
 	<% 
 		if (session.getAttribute("username") == null) {
 			out.print("<div align=\"right\">");
@@ -34,11 +34,11 @@
 			out.print("<a href=\"logout.jsp\">Log out</a></div>");
 		}
 	%>
-	
+
 	<h1 align="center">Blog</h1>
 	<%
 		ResultSet rset = null;
-		
+
 		try {
 			Statement stmt = conn.createStatement();
 			rset = stmt.executeQuery("SELECT * FROM blogpost");
@@ -52,7 +52,7 @@
 		if (rset != null) {
 			while (rset.next()) {
 				int bid = rset.getInt("bid");
-				out.print("<p><a href=\"blogpost.jsp?bid=" + bid + "\">" + rset.getString("title") + "</a></p>");
+				out.print("<p align='center'><a href=\"blogpost.jsp?bid=" + bid + "\">" + rset.getString("title") + "</a></p>");
 			}
 		} else {
 			out.print(error_msg);
