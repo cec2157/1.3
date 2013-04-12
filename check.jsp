@@ -41,6 +41,7 @@
 				if ((rset.getString("password")).equals(password)) {
 					out.print("Welcome!");
 					session.setAttribute("username", username);
+					session.setAttribute("type", rset.getString("type"));
 					response.sendRedirect("index.jsp");
 				}
 				else {

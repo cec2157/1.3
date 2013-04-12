@@ -37,7 +37,7 @@
 							+ "WHERE B.cid = C.cid AND C.cid = W.cid AND B.bid = " + bid);
 			Statement stmt3 = conn.createStatement();
 			rset3 = stmt3
-					.executeQuery("SELECT * FROM blog_has_tag H, tag T WHERE H.name = T.name AND H.bid = " + bid);
+					.executeQuery("SELECT * FROM blog_has_tag T WHERE T.bid = " + bid);
 		} catch (SQLException e) {
 			error_msg = e.getMessage();
 			if (conn != null) {
