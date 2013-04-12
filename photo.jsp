@@ -12,7 +12,6 @@
 	OracleDataSource ods = new OracleDataSource();
 	ods.setURL("jdbc:oracle:thin:pq2117/zhaozhong@//w4111b.cs.columbia.edu:1521/ADB");
 	conn = ods.getConnection();
-	String user = (String) session.getAttribute("username");
 %>
 
 <html>
@@ -27,7 +26,7 @@
 		try {
 			Statement stmt = conn.createStatement();
 			rset = stmt
-					.executeQuery("SELECT * FROM manage_photo M, photo P WHERE M.pid = P.pid AND M.username =" + "'" + user + "'");
+					.executeQuery("SELECT * FROM manage_photo M, photo P WHERE M.pid = P.pid");
 		} catch (SQLException e) {
 			error_msg = e.getMessage();
 			if (conn != null) {
@@ -39,7 +38,6 @@
 			out.print("<table align='center'>");
 			out.print("<th>" + "Photo Name" + "</th>");
 			out.print("<th>" + "Date" + "</th>");
-			out.print("<th>" + "Size(KB)" + "</th>");
 			while (rset.next()) {
 				int pid = rset.getInt("pid");
 				out.print("<tr>");

@@ -52,18 +52,14 @@
 		date = date + "'DD-MM-YYYY HH24:MI:SS')"; 
 		
 		text = text.replaceAll("\'", "\'\'");
-		System.out.println(text);
 		
 		String update1 = "INSERT INTO comments(cid, cdate, text) VALUES(" + newcid + ", " + date + ", \'" + text +"\')";
-		System.out.println(update1);
 		stmt1.executeUpdate(update1);
 		stmt1.executeBatch();
 		
 		Statement stmt2 = conn.createStatement();
 		stmt2.executeUpdate("INSERT INTO write_comment(cid, username) VALUES(" + newcid + ", \'" + username + "\')");
 		stmt2.executeBatch();
-		System.out.println(bid);
-		System.out.println(pid);
 
 		if (bid != -1) {
 			Statement stmt3 = conn.createStatement();
