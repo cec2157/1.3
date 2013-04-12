@@ -38,21 +38,20 @@
 		}
 
 		int year = now.get(Calendar.YEAR);
-		int month = now.get(Calendar.MONTH);
+		int month = now.get(Calendar.MONTH) + 1;
 		int day = now.get(Calendar.DATE);
-		
 		int hour = now.get(Calendar.HOUR);
 		int min = now.get(Calendar.MINUTE);
 		int sec = now.get(Calendar.SECOND);
 		String date = "to_date('" + day + "-" + month + "-" + year + " " + hour + ":" + min + ":" + sec + "', ";
-		date = date + "'DD-MM-YYYY HH24:MI:SS')";
+		date = date + "'DD-MM-YYYY HH24:MI:SS')"; 
 		
 		text = text.replaceAll("\'", "\'\'");
+		System.out.println(text);
 		
-		stmt1.executeUpdate("INSERT INTO comments(cid, cdate, text) VALUES(" + newcid + ", \'" + date + "\', \'" + text +"\')");
-
-		stmt1.executeUpdate("INSERT INTO comments(cid, cdate, text) VALUES(" +
-							newcid + ", " + date + ", \'" + text +"\')");
+		String update1 = "INSERT INTO comments(cid, cdate, text) VALUES(" + newcid + ", " + date + ", \'" + text +"\')";
+		System.out.println(update1);
+		stmt1.executeUpdate(update1);
 		stmt1.executeBatch();
 
 		Statement stmt2 = conn.createStatement();

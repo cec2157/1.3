@@ -39,17 +39,16 @@
 		}
 
 		int year = now.get(Calendar.YEAR);
-		int month = now.get(Calendar.MONTH);
+		int month = now.get(Calendar.MONTH) + 1;
 		int day = now.get(Calendar.DATE);
-		
-		text = text.replaceAll("\'", "\'\'");
-		subject = subject.replaceAll("\'", "\'\'");
-		
 		int hour = now.get(Calendar.HOUR);
 		int min = now.get(Calendar.MINUTE);
 		int sec = now.get(Calendar.SECOND);
 		String date = "to_date('" + day + "-" + month + "-" + year + " " + hour + ":" + min + ":" + sec + "', ";
-		date = date + "'DD-MM-YYYY HH24:MI:SS')";
+		date = date + "'DD-MM-YYYY HH24:MI:SS')"; 
+		
+		text = text.replaceAll("\'", "\'\'");
+		subject = subject.replaceAll("\'", "\'\'");
 
 		stmt1.executeUpdate("INSERT INTO message(mid, subject, mdate, text) VALUES(" +
 							newmid + ", \'" + subject + "\', " + date + ", \'" + text +"\')");
