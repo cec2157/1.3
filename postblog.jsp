@@ -29,7 +29,7 @@
 			ResultSet rset = null;
 			int newbid = 0;
 			Calendar now = Calendar.getInstance();
-			
+
 			Statement stmt1 = conn.createStatement();
 			rset = stmt1.executeQuery("SELECT MAX(bid) FROM blogpost");
 			if (rset != null) {
@@ -37,22 +37,22 @@
 					newbid = rset.getInt("MAX(bid)") + 1;
 				}
 			}
-			
+
 			int year = now.get(Calendar.YEAR);
-			int month = now.get(Calendar.MONTH) + 1;
+			int month = now.get(Calendar.MONTH);
 			int day = now.get(Calendar.DATE);
 			int hour = now.get(Calendar.HOUR);
 			int min = now.get(Calendar.MINUTE);
 			int sec = now.get(Calendar.SECOND);
 			String date = "to_date('" + day + "-" + month + "-" + year + " " + hour + ":" + min + ":" + sec + "', ";
-			date = date + "'DD-MM-YYYY HH24:MI:SS')"; 
-			
+			date = date + "'DD-MM-YYYY HH24:MI:SS')";
+
 			text = text.replaceAll("\'", "\'\'");
 			title = title.replaceAll("\'", "\'\'");
 			stmt1.executeUpdate("INSERT INTO blogpost(bid, title, bdate, text) VALUES(" +
 								newbid + ", \'" + title + "\', " + date + ", \'" + text +"\')");
 			stmt1.executeBatch();
-			
+
 			Statement stmt2 = conn.createStatement();
 			StringTokenizer strtok = new StringTokenizer(tags, ",");
 			while (strtok.hasMoreElements())
