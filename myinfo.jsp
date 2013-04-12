@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>My Homepage</title>
+<title>My Info</title>
 </head>
 <body>
 	<%

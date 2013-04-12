@@ -24,15 +24,18 @@
 	<% 
 		if (session.getAttribute("username") == null) {
 			out.print("<div align=\"right\">");
-			out.print("<a href=\"login.html\">Log in</a></div>");
+			out.print("<a href=\"login.html\">Log in</a><br />");
+			out.print("<a href=\"register.html\">Register</a></div>");
 		} else {
 			out.print("<div align=\"right\">");
 			out.print("<a href=\"myinfo.jsp\">My info</a><br />");
+			if (session.getAttribute("type").equals("ADMIN"))
+				out.print("<a href=\"writeblog.html\">Write blogpost</a><br />");
 			out.print("<a href=\"logout.jsp\">Log out</a></div>");
 		}
 	%>
 	
-	<h1 align="center">My blog</h1>
+	<h1 align="center">Blog</h1>
 	<%
 		ResultSet rset = null;
 		

@@ -49,6 +49,7 @@
 			while (rset1.next()) {
 				out.print("<h3>" + rset1.getString("title") + "</h3>");
 				out.print("<p>" + rset1.getString("text") + "</p>");
+				out.print("<p>Posted: " + rset1.getDate("bdate") + "</p>");
 			}
 		%>
 		<br />
