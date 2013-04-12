@@ -36,16 +36,16 @@
 		}
 
 		if (rset != null) {
-			out.print("<table>");
+			out.print("<table align='center'>");
 			out.print("<th>" + "Photo Name" + "</th>");
 			out.print("<th>" + "Date" + "</th>");
 			out.print("<th>" + "Size(KB)" + "</th>");
 			while (rset.next()) {
 				out.print("<tr>");
 				out.print("<th>" + "<a href=\"photodetail.jsp?pid=" + rset.getString("pid") + "\">" + rset.getString("ptitle") + "</a></th>");
-				
+
 				//out.print("<a href=\"photo.jsp?username=" + username + "\">" + "My Photos" + "</a>");
-	
+
 				out.print("<th>" + rset.getString("pdate") + "</th>");
 				out.print("<th>" + rset.getString("psize") + "</th>");
 				out.print("</tr>");
