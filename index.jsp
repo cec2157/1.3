@@ -30,7 +30,6 @@
 			out.print("<a href=\"myinfo.jsp\">My info</a><br />");
 			out.print("<a href=\"logout.jsp\">Log out</a></div>");
 		}
-	
 	%>
 	
 	<h1 align="center">My blog</h1>

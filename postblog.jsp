@@ -5,6 +5,7 @@
 <%@ page import="java.sql.*"%>
 <%@ page import="oracle.jdbc.pool.OracleDataSource"%>
 <%@ page import="java.util.StringTokenizer"%>
+<%@ page import="java.util.Calendar"%>
 
 <%
 	Connection conn = null;
@@ -25,9 +26,35 @@
 <body>
 	<%
 		if (session.getAttribute("type").equals("ADMIN")) {
-			StringTokenizer st = new StringTokenizer(tags, ",");
-			while (st.hasMoreElements())
-				System.out.println(st.nextElement());
+			ResultSet rset = null;
+			int newbid = 0;
+			String[] months = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
+			Calendar now = Calendar.getInstance();
+			
+			Statement stmt1 = conn.createStatement();
+			rset = stmt1.executeQuery("SELECT MAX(bid) FROM blogpost");
+			if (rset != null) {
+				if (rset.next()) {
+					newbid = rset.getInt("MAX(bid)") + 1;
+				}
+			}
+			
+			int year = now.get(Calendar.YEAR);
+			int month = now.get(Calendar.MONTH);
+			int day = now.get(Calendar.DATE);
+			String date = day + "-" + months[month] + "-" + year; 
+			System.out.println(date);
+			
+			stmt1.executeUpdate("INSERT INTO blogpost(bid, title, bdate, text) VALUES(" +
+								newbid + ", \'" + title + "\', \'" + date + "\', \'" + text +"\')");
+			stmt1.executeBatch();
+			
+			Statement stmt2 = conn.createStatement();
+			StringTokenizer strtok = new StringTokenizer(tags, ",");
+			while (strtok.hasMoreElements())
+				stmt2.executeUpdate("INSERT INTO blog_has_tag(name, bid) VALUES(\'" + strtok.nextElement() + "\', " + newbid + ")");
+			stmt2.executeBatch();
+			response.sendRedirect("index.jsp");
 		}
 	%>
 </body>
