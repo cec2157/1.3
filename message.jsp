@@ -22,6 +22,9 @@
 </head>
 <body>
 	<div align="right">
+	<a href="home.jsp">Home</a>
+	</div>
+	<div align="right">
 	<a href="writemsg.html">Write Message</a>
 	</div>
 	<%
