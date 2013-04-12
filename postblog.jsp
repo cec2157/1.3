@@ -44,6 +44,8 @@
 			int day = now.get(Calendar.DATE);
 			String date = day + "-" + months[month] + "-" + year;
 			
+			text = text.replaceAll("\'", "\'\'");
+			title = title.replaceAll("\'", "\'\'");
 			stmt1.executeUpdate("INSERT INTO blogpost(bid, title, bdate, text) VALUES(" +
 								newbid + ", \'" + title + "\', \'" + date + "\', \'" + text +"\')");
 			stmt1.executeBatch();

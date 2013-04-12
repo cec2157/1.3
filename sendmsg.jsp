@@ -44,6 +44,8 @@
 		int day = now.get(Calendar.DATE);
 		String date = day + "-" + months[month] + "-" + year;
 		
+		text = text.replaceAll("\'", "\'\'");
+		subject = subject.replaceAll("\'", "\'\'");
 		stmt1.executeUpdate("INSERT INTO message(mid, subject, mdate, text) VALUES(" +
 							newmid + ", \'" + subject + "\', \'" + date + "\', \'" + text +"\')");
 		stmt1.executeBatch();

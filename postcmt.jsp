@@ -43,8 +43,8 @@
 		int day = now.get(Calendar.DATE);
 		String date = day + "-" + months[month] + "-" + year;
 		
-		stmt1.executeUpdate("INSERT INTO comments(cid, cdate, text) VALUES(" +
-							newcid + ", \'" + date + "\', \'" + text +"\')");
+		text = text.replaceAll("\'", "\'\'");
+		stmt1.executeUpdate("INSERT INTO comments(cid, cdate, text) VALUES(" + newcid + ", \'" + date + "\', \'" + text +"\')");
 		stmt1.executeBatch();
 	
 		Statement stmt2 = conn.createStatement();
@@ -54,6 +54,8 @@
 		Statement stmt3 = conn.createStatement();
 		stmt3.executeUpdate("INSERT INTO blog_comment(cid, bid) VALUES(" + newcid + ", " + bid + ")");
 		stmt3.executeBatch();
+		if (conn != null)
+			conn.close();
 		
 		response.sendRedirect("blogpost.jsp?bid=" + bid);
 	%>
