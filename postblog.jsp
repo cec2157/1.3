@@ -42,8 +42,7 @@
 			int year = now.get(Calendar.YEAR);
 			int month = now.get(Calendar.MONTH);
 			int day = now.get(Calendar.DATE);
-			String date = day + "-" + months[month] + "-" + year; 
-			System.out.println(date);
+			String date = day + "-" + months[month] + "-" + year;
 			
 			stmt1.executeUpdate("INSERT INTO blogpost(bid, title, bdate, text) VALUES(" +
 								newbid + ", \'" + title + "\', \'" + date + "\', \'" + text +"\')");
