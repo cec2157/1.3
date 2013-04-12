@@ -27,9 +27,8 @@
 	<%
 		ResultSet rset = null;
 		int newcid = 0;
-		String[] months = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
 		Calendar now = Calendar.getInstance();
-		
+
 		Statement stmt1 = conn.createStatement();
 		rset = stmt1.executeQuery("SELECT MAX(cid) FROM comments");
 		if (rset != null) {
@@ -37,24 +36,28 @@
 				newcid = rset.getInt("MAX(cid)") + 1;
 			}
 		}
-		
+
 		int year = now.get(Calendar.YEAR);
 		int month = now.get(Calendar.MONTH);
 		int day = now.get(Calendar.DATE);
-		String date = day + "-" + months[month] + "-" + year;
-		
+		int hour = now.get(Calendar.HOUR);
+		int min = now.get(Calendar.MINUTE);
+		int sec = now.get(Calendar.SECOND);
+		String date = "to_date('" + day + "-" + month + "-" + year + " " + hour + ":" + min + ":" + sec + "', ";
+		date = date + "'DD-MM-YYYY HH24:MI:SS')";
+
 		stmt1.executeUpdate("INSERT INTO comments(cid, cdate, text) VALUES(" +
-							newcid + ", \'" + date + "\', \'" + text +"\')");
+							newcid + ", " + date + ", \'" + text +"\')");
 		stmt1.executeBatch();
-	
+
 		Statement stmt2 = conn.createStatement();
 		stmt2.executeUpdate("INSERT INTO write_comment(cid, username) VALUES(" + newcid + ", \'" + username + "\')");
 		stmt2.executeBatch();
-		
+
 		Statement stmt3 = conn.createStatement();
 		stmt3.executeUpdate("INSERT INTO blog_comment(cid, bid) VALUES(" + newcid + ", " + bid + ")");
 		stmt3.executeBatch();
-		
+
 		response.sendRedirect("blogpost.jsp?bid=" + bid);
 	%>
 </body>
