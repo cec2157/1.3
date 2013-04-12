@@ -21,6 +21,9 @@
 	<title>Message</title>
 </head>
 <body>
+	<div align="right">
+	<a href="writemsg.html">Write Message</a>
+	</div>
 	<%
 		ResultSet rset = null;
 
@@ -31,8 +34,8 @@
 								  "M.mid = W.mid AND sender_username = " + "'"+ username + 
 								  "'" + "UNION SELECT * FROM message M2, write_msg W2 WHERE " + 
 								  "M2.mid = W2.mid AND receiver_username = " + "'" + username + "'");
-		
-			
+
+
 		} catch (SQLException e) {
 			error_msg = e.getMessage();
 			if (conn != null) {
@@ -41,7 +44,7 @@
 		}
 
 		if (rset != null) {
-			out.print("<table>");
+			out.print("<table align='center'>");
 			out.print("<th>" + "Sender" + "</th>");
 			out.print("<th>" + "Receiver" + "</th>");
 			out.print("<th>" + "Subject" + "</th>");
