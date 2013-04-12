@@ -23,21 +23,52 @@
 </head>
 <body>
 	<%
+		ResultSet rs = null;
+		
 		try {
 			Statement stmt = conn.createStatement();
-			stmt.executeUpdate("INSERT INTO bloguser(username, password, type) VALUES(\'" + username
-													+ "\', \'" + password + "\', \'USER\')");
-			stmt.executeBatch();
+			rs = stmt.executeQuery("SELECT username FROM bloguser");
 		} catch (SQLException e) {
 			error_msg = e.getMessage();
 			if (conn != null) {
 				conn.close();
 			}
 		}
-		if (conn != null) {
-			conn.close();
+		
+		boolean open = true;
+		if (rs != null)
+			while (rs.next())
+				if (rs.getString("username").equals(username)) {
+					open = false;
+					break;
+				}
+		
+		if (open) {
+			try {
+				Statement stmt = conn.createStatement();
+				stmt.executeUpdate("INSERT INTO bloguser(username, password, type) VALUES(\'" + username
+														+ "\', \'" + password + "\', \'USER\')");
+				stmt.executeBatch();
+			} catch (SQLException e) {
+				error_msg = e.getMessage();
+				if (conn != null) {
+					conn.close();
+				}
+			}
+			out.print("Registration successful!");
+			out.print("<br />");
+			out.print("<a href='login.html'" + ">" + "Log in" + "</a>");
+			if (conn != null) {
+				conn.close();
+			}
+		} else {
+			out.print("Your username is taken!");
+			out.print("<br />");
+			out.print("<a href='register.html'" + ">" + "Go back to registration" + "</a>");
+			if (conn != null) {
+				conn.close();
+			}
 		}
-		response.sendRedirect("index.jsp");
 	%>
 </body>
 </html>
