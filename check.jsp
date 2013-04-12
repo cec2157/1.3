@@ -42,7 +42,7 @@
 					out.print("Welcome!");
 					session.setAttribute("username", username);
 					session.setAttribute("type", rset.getString("type"));
-					response.sendRedirect("index.jsp");
+					response.sendRedirect("home.jsp");
 				}
 				else {
 					out.print("Your password is incorrect!");

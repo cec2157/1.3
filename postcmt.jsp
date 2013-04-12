@@ -15,7 +15,12 @@
 	conn = ods.getConnection();
 	String username = (String) session.getAttribute("username");
 	String text = request.getParameter("body");
-	int bid = Integer.parseInt(request.getParameter("bid"));
+	int bid = -1;
+	if (request.getParameter("bid") != null)
+		bid = Integer.parseInt(request.getParameter("bid"));
+	int pid = -1;
+	if (request.getParameter("pid") != null)
+		pid = Integer.parseInt(request.getParameter("pid"));
 %>
 
 <html>
@@ -53,18 +58,28 @@
 		System.out.println(update1);
 		stmt1.executeUpdate(update1);
 		stmt1.executeBatch();
-
+		
 		Statement stmt2 = conn.createStatement();
 		stmt2.executeUpdate("INSERT INTO write_comment(cid, username) VALUES(" + newcid + ", \'" + username + "\')");
 		stmt2.executeBatch();
+		System.out.println(bid);
+		System.out.println(pid);
 
-		Statement stmt3 = conn.createStatement();
-		stmt3.executeUpdate("INSERT INTO blog_comment(cid, bid) VALUES(" + newcid + ", " + bid + ")");
-		stmt3.executeBatch();
-		if (conn != null)
-			conn.close();
-		
-		response.sendRedirect("blogpost.jsp?bid=" + bid);
+		if (bid != -1) {
+			Statement stmt3 = conn.createStatement();
+			stmt3.executeUpdate("INSERT INTO blog_comment(cid, bid) VALUES(" + newcid + ", " + bid + ")");
+			stmt3.executeBatch();
+			if (conn != null)
+				conn.close();
+			response.sendRedirect("blogpost.jsp?bid=" + bid);
+		} else if (pid != -1) {
+			Statement stmt3 = conn.createStatement();
+			stmt3.executeUpdate("INSERT INTO photo_comment(cid, pid) VALUES(" + newcid + ", " + pid + ")");
+			stmt3.executeBatch();
+			if (conn != null)
+				conn.close();
+			response.sendRedirect("photodetail.jsp?pid=" + pid);
+		}
 	%>
 </body>
 </html>

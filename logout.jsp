@@ -10,7 +10,7 @@
 	<%
 		session.setAttribute("username", null);
 		session.setAttribute("type", null);
-		response.sendRedirect("index.jsp");
+		response.sendRedirect("home.jsp");
 	%>
 </body>
 </html>

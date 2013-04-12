@@ -41,14 +41,14 @@
 			out.print("<th>" + "Date" + "</th>");
 			out.print("<th>" + "Size(KB)" + "</th>");
 			while (rset.next()) {
+				int pid = rset.getInt("pid");
 				out.print("<tr>");
-				out.print("<th>" + "<a href=\"photodetail.jsp?pid=" + rset.getString("pid") + "\">" + rset.getString("ptitle") + "</a></th>");
-
-				//out.print("<a href=\"photo.jsp?username=" + username + "\">" + "My Photos" + "</a>");
-
+				out.print("<th>" + "<a href=\"photodetail.jsp?pid=" + pid + "\">" + rset.getString("ptitle") + "</a></th>");
 				out.print("<th>" + rset.getString("pdate") + "</th>");
-				out.print("<th>" + rset.getString("psize") + "</th>");
-				out.print("</tr>");
+				if (session.getAttribute("type") == null || session.getAttribute("type").equals("USER"))
+					out.print("</tr>");
+				else
+					out.print(" " + "<th><a href=\"deletephoto.jsp?pid=" + pid + "\">" + "delete" + "</a></th></tr>");
 			}
 			out.print("</table>");
 		} else {

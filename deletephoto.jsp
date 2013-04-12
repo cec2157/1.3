@@ -12,19 +12,21 @@
 	OracleDataSource ods = new OracleDataSource();
 	ods.setURL("jdbc:oracle:thin:pq2117/zhaozhong@//w4111b.cs.columbia.edu:1521/ADB");
 	conn = ods.getConnection();
-	String cid = request.getParameter("cid");
+	String pid = request.getParameter("pid");
 %>
 
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Blog</title>
 </head>
 <body>
 	<%
 		Statement stmt = conn.createStatement();
-		stmt.executeUpdate("DELETE FROM comments WHERE cid=" + cid);
+		ResultSet rset = null;
+		stmt.executeUpdate("DELETE FROM photo WHERE pid=" + pid);
 		stmt.executeBatch();
-		response.sendRedirect("home.jsp");
+		response.sendRedirect("photo.jsp");
 		
 	%>
 </body>

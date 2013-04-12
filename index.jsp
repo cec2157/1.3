@@ -28,7 +28,7 @@
 			out.print("<a href=\"register.html\">Register</a></div>");
 		} else {
 			out.print("<div align=\"right\">");
-			out.print("<a href=\"myinfo.jsp\">My info</a><br />");
+			out.print("<a href=\"message.jsp\">My messages</a><br />");
 			if (session.getAttribute("type").equals("ADMIN"))
 				out.print("<a href=\"writeblog.html\">Write blogpost</a><br />");
 			out.print("<a href=\"logout.jsp\">Log out</a></div>");

@@ -55,6 +55,9 @@
 				out.print("<td>" + rset2.getString("cdate") + "</td>");
 				out.print("<td>" + rset2.getString("username") + ":" + "</td>");
 				out.print("<td>" + rset2.getString("text") + "</td>");
+				if (session.getAttribute("type") != null && session.getAttribute("username") != null)
+					if (session.getAttribute("type").equals("ADMIN") || session.getAttribute("username").equals(rset2.getString("username")))
+						out.print("<td>" + "<a href=\"deletecomment.jsp?cid=" + rset2.getString("cid") + "\">" + "delete" + "</a></td>");
 				out.print("</tr>");
 			}
 			out.print("</table>");
@@ -63,6 +66,15 @@
 		}
 		if (conn != null) {
 			conn.close();
+		}
+	%>
+	
+	<%
+		if (session.getAttribute("username") != null) {
+			out.println("<h5>Post a comment</h5>");
+			out.println("<form name=\"writecmt\" method=\"post\" action=\"postcmt.jsp?pid=" + pid + "\">");
+			out.println("<textarea maxlength=\"50\" rows=\"5\" cols=\"25\" placeholder=\"Text\" name=\"body\"></textarea><br />");
+			out.println("<p><input type=\"Submit\" value=\"Submit\"><input type=\"Reset\" value=\"Reset\"></p></form>");
 		}
 	%>
 </body>
