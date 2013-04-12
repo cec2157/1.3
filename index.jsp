@@ -35,7 +35,7 @@
 		}
 	%>
 
-	<h1 align="center">Blog</h1>
+	<h1 align="center"><a href="home.jsp">Blog</a></h1>
 	<%
 		ResultSet rset = null;
 		try {
