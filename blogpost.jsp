@@ -79,13 +79,13 @@
 		}
 	%>
 	
-	<h5>Post a comment</h5>
-	<form name="writecmt" method="post" action="postcmt.jsp?bid=<%= bid %>">
-	  <textarea maxlength="50" rows="5" cols="25" placeholder="Text" name="body"></textarea><br />
-	  <p>
-		<input type="Submit" value="Submit">
-		<input type="Reset" value="Reset">
-	  </p>
-</form>
+	<%
+		if (session.getAttribute("username") != null) {
+			out.println("<h5>Post a comment</h5>");
+			out.println("<form name=\"writecmt\" method=\"post\" action=\"postcmt.jsp?bid=" + bid + "\">");
+			out.println("<textarea maxlength=\"50\" rows=\"5\" cols=\"25\" placeholder=\"Text\" name=\"body\"></textarea><br />");
+			out.println("<p><input type=\"Submit\" value=\"Submit\"><input type=\"Reset\" value=\"Reset\"></p></form>");
+		}
+	%>
 </body>
 </html>
