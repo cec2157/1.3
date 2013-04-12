@@ -22,6 +22,8 @@
 <body>
 
 	<% 
+		out.print("<div align=\"right\">");
+		out.print("<a href=\"home.jsp\">Home</a></div>");
 		if (session.getAttribute("username") == null) {
 			out.print("<div align=\"right\">");
 			out.print("<a href=\"login.html\">Log in</a><br />");
