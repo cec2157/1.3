@@ -21,6 +21,8 @@
 </head>
 <body>
 	<%
+		out.print("<div align=\"right\">");
+		out.print("<a href=\"home.jsp\">Home</a></div>");
 		ResultSet rset = null;
 
 		try {
