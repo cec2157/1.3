@@ -12,34 +12,22 @@
 	OracleDataSource ods = new OracleDataSource();
 	ods.setURL("jdbc:oracle:thin:pq2117/zhaozhong@//w4111b.cs.columbia.edu:1521/ADB");
 	conn = ods.getConnection();
+	String user = (String) session.getAttribute("username");
 %>
 
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Blog</title>
+	<title>Photo</title>
 </head>
 <body>
-	
-	<% 
-		if (session.getAttribute("username") == null) {
-			out.print("<div align=\"right\">");
-			out.print("<a href=\"login.html\">Log in</a></div>");
-		} else {
-			out.print("<div align=\"right\">");
-			out.print("<a href=\"myinfo.jsp\">My info</a><br />");
-			out.print("<a href=\"logout.jsp\">Log out</a></div>");
-		}
-	
-	%>
-	
-	<h1 align="center">My blog</h1>
 	<%
 		ResultSet rset = null;
-		
+
 		try {
 			Statement stmt = conn.createStatement();
-			rset = stmt.executeQuery("SELECT * FROM blogpost");
+			rset = stmt
+					.executeQuery("SELECT * FROM manage_photo M, photo P WHERE M.pid = P.pid AND M.username =" + "'" + user + "'");
 		} catch (SQLException e) {
 			error_msg = e.getMessage();
 			if (conn != null) {
@@ -48,10 +36,21 @@
 		}
 
 		if (rset != null) {
+			out.print("<table>");
+			out.print("<th>" + "Photo Name" + "</th>");
+			out.print("<th>" + "Date" + "</th>");
+			out.print("<th>" + "Size(KB)" + "</th>");
 			while (rset.next()) {
-				int bid = rset.getInt("bid");
-				out.print("<p><a href=\"blogpost.jsp?bid=" + bid + "\">" + rset.getString("title") + "</a></p>");
+				out.print("<tr>");
+				out.print("<th>" + "<a href=\"photodetail.jsp?pid=" + rset.getString("pid") + "\">" + rset.getString("ptitle") + "</a></th>");
+				
+				//out.print("<a href=\"photo.jsp?username=" + username + "\">" + "My Photos" + "</a>");
+	
+				out.print("<th>" + rset.getString("pdate") + "</th>");
+				out.print("<th>" + rset.getString("psize") + "</th>");
+				out.print("</tr>");
 			}
+			out.print("</table>");
 		} else {
 			out.print(error_msg);
 		}

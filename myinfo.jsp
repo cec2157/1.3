@@ -7,7 +7,7 @@
 <%@ page import="oracle.jdbc.pool.OracleDataSource"%>
 
 <%
-	String username = request.getParameter("username");
+	String username = (String) session.getAttribute("username");
 %>
 
 <html>
@@ -17,9 +17,9 @@
 </head>
 <body>
 	<%
-	out.print("<a href=\"photo.jsp?username=" + username + "\">" + "My Photos" + "</a>");
+	out.print("<a href=\"photo.jsp\">" + "My Photos" + "</a>");
 	out.print("<br />");
-	out.print("<a href=\"message.jsp?username=" + username + "\">" + "My Messages" + "</a>");
+	out.print("<a href=\"message.jsp\">" + "My Messages" + "</a>");
 	%>
 </body>
 </html>
