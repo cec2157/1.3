@@ -43,9 +43,8 @@
 			rset = stmt.executeQuery("SELECT * FROM blogpost");
 		} catch (SQLException e) {
 			error_msg = e.getMessage();
-			if (conn != null) {
+			if (conn != null)
 				conn.close();
-			}
 		}
 
 		if (rset != null) {
@@ -57,12 +56,11 @@
 				else
 					out.print(" " + "<a href=\"deleteblog.jsp?bid=" + bid + "\">" + "delete" + "</a></p>");
 			}
-		} else {
+		} else 
 			out.print(error_msg);
-		}
-		if (conn != null) {
+		
+		if (conn != null)
 			conn.close();
-		}
 	%>
 </body>
 </html>

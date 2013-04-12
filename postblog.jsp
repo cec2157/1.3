@@ -58,6 +58,9 @@
 			while (strtok.hasMoreElements())
 				stmt2.executeUpdate("INSERT INTO blog_has_tag(name, bid) VALUES(\'" + strtok.nextElement() + "\', " + newbid + ")");
 			stmt2.executeBatch();
+			
+			if (conn != null)
+				conn.close();
 			response.sendRedirect("index.jsp");
 		}
 	%>

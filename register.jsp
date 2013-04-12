@@ -58,16 +58,14 @@
 			out.print("Registration successful!");
 			out.print("<br />");
 			out.print("<a href='login.html'" + ">" + "Log in" + "</a>");
-			if (conn != null) {
+			if (conn != null)
 				conn.close();
-			}
 		} else {
 			out.print("Your username is taken!");
 			out.print("<br />");
 			out.print("<a href='register.html'" + ">" + "Go back to registration" + "</a>");
-			if (conn != null) {
+			if (conn != null)
 				conn.close();
-			}
 		}
 	%>
 </body>
