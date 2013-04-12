@@ -39,7 +39,7 @@
 			}
 
 			int year = now.get(Calendar.YEAR);
-			int month = now.get(Calendar.MONTH);
+			int month = now.get(Calendar.MONTH) + 1;
 			int day = now.get(Calendar.DATE);
 			int hour = now.get(Calendar.HOUR);
 			int min = now.get(Calendar.MINUTE);
