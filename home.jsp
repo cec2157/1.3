@@ -16,8 +16,10 @@
 		} else {
 			out.print("<div align=\"right\">");
 			out.print("<a href=\"message.jsp\">My messages</a><br />");
-			if (session.getAttribute("type").equals("ADMIN"))
+			if (session.getAttribute("type").equals("ADMIN")) {
 				out.print("<a href=\"writeblog.html\">Write blogpost</a><br />");
+				out.print("<a href=\"newphoto.html\">Post photo</a><br />");
+			}
 			out.print("<a href=\"logout.jsp\">Log out</a></div>");
 		}
 	%>
